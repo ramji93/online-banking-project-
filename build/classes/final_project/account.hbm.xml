@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+ "-//Hibernate/Hibernate Mapping DTD//EN"
+ "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"> 
+<hibernate-mapping>
+<class name="final_project.account" table="account_details">
+
+<id name="accno" type="int">
+<generator class="increment"></generator>
+</id>
+<property name="cust_name"></property>
+<property name="dob"></property>
+<property name="address"></property>
+<property name="emailid"></property>
+<property name="type"></property>
+<property name="balance"></property>
+
+</class>
+
+<class name ="final_project.displaystat" table="display_stats">
+<id name="sno" type="int" >
+         <generator class="increment"/>
+      </id>
+<property name="name"></property>
+<property name="trans_date"></property>
+<property name="description"></property>
+<property name="withdraw"></property>
+<property name="deposit"></property>
+ <property name="balance"></property>
+</class>
+
+
+
+
+
+</hibernate-mapping>

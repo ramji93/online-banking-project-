@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans
+
+xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+
+	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
+		<property name="driverClassName"  value="com.mysql.jdbc.Driver"></property>
+		<property name="url" value="jdbc:mysql://localhost/f1"></property>
+		<property name="username" value="ramji"></property>
+		<property name="password" value="mysql"></property>
+	</bean>
+	
+	<bean id="mysessionFactory"	class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource"><ref bean="dataSource" /></property>
+		
+		<property name="mappingResources">
+		<list>
+		<value>final_project/account.hbm.xml</value>
+		</list>
+		</property>
+		
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
+				<prop key="hibernate.show_sql">true</prop>
+				
+			</props>
+		</property>
+	</bean>
+	
+	<bean id = "hibtemplate" class ="org.springframework.orm.hibernate4.HibernateTemplate">
+	<property name="sessionFactory" ref="mysessionFactory"/>
+	
+	</bean>
+	
+	<bean id="acc" class="final_project.accountdao">
+	<property name="template" ref="hibtemplate" />
+	</bean>
+	
+	<bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager"> 
+<property name="sessionFactory" ref="mysessionFactory" /> 
+</bean>
+	
+	</beans>
